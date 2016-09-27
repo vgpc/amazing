@@ -69,6 +69,8 @@ const (
 
 type Amazing struct {
 	Config *AmazingClientConfig
+
+	HttpClient *http.Client
 }
 
 type AmazingClientConfig struct {
@@ -106,7 +108,7 @@ func newAmazing(domain, tag, access, secret string) (*Amazing, error) {
 			AWSAccessKeyId: access,
 			AWSSecretKey:   secret,
 		}
-		return &Amazing{config}, nil
+		return &Amazing{Config: config}, nil
 	} else {
 		return nil, errors.New(fmt.Sprintf("Service domain does not exist %v", serviceDomains))
 	}
@@ -180,8 +182,15 @@ func (a *Amazing) SimilarityLookup(params url.Values) (*AmazonSimilarityLookupRe
 
 }
 
+func (a *Amazing) httpClient() *http.Client {
+	if a.HttpClient == nil {
+		a.HttpClient = &http.Client{Timeout: 6 * time.Second}
+	}
+	return a.HttpClient
+}
+
 func (a *Amazing) Request(params url.Values, result interface{}) error {
-	httpClient := &http.Client{Timeout: 6 * time.Second}
+	httpClient := a.httpClient()
 	merged := a.MergeParamsWithDefaults(params)
 
 	u := url.URL{

@@ -88,6 +88,10 @@ type AmazonItemOfferSummary struct {
 	LowestUsedPrice        AmazonItemPrice
 	LowestNewPrice         AmazonItemPrice
 	LowestCollectiblePrice AmazonItemPrice
+	TotalCollectible       int64
+	TotalNew               int64
+	TotalRefurbished       int64
+	TotalUsed              int64
 }
 
 type AmazonItemPrice struct {

@@ -214,7 +214,7 @@ func (a *Amazing) Request(params url.Values, result interface{}) error {
 
 	if res.StatusCode != http.StatusOK {
 		b, err := ioutil.ReadAll(res.Body)
-		fmt.Printf("body: %+v", b)
+		fmt.Printf("body: %+s", string(b))
 
 		if err != nil {
 			return err

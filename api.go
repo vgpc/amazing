@@ -214,41 +214,30 @@ func (a *Amazing) Request(params url.Values, result interface{}) error {
 
 	if res.StatusCode != http.StatusOK {
 		b, err := ioutil.ReadAll(res.Body)
-		fmt.Printf("body: %+s", string(b))
-
 		if err != nil {
-			return err
+			return fmt.Errorf("Amazing ReadAll err: %s", err)
 		}
 		var errorResponse AmazonItemLookupErrorResponse
 		err = xml.Unmarshal(b, &errorResponse)
 		if err != nil {
-			log.Printf("unmarshall err")
-			return err
+			return fmt.Errorf("Amazing Unmarshal err: %s", err)
 		}
 		if errorResponse.Code == "RequestThrottled" {
 			time.Sleep(time.Second)
 			return a.Request(params, result)
 		}
 
-		log.Printf("AMAZING ERROR")
-		err = ioutil.WriteFile("test.xml", b, 0644)
-		if err != nil {
-			log.Printf("WriteFile err: %s", err)
-		}
 		return &errorResponse
 	}
 
 	b, err := ioutil.ReadAll(res.Body)
-
 	if err != nil {
-		return err
+		return fmt.Errorf("Amazing StatusOK ReadAll err: %s", err)
 	}
 
 	err = xml.Unmarshal(b, result)
-	ioutil.WriteFile("test.xml", b, 0644)
-	err = ioutil.WriteFile("test.xml", b, 0644)
 	if err != nil {
-		log.Printf("WriteFile err after success: %s", err)
+		return fmt.Errorf("Amazing StatusOK Unmarshal err: %s", err)
 	}
 
 	return err

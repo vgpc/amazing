@@ -9,7 +9,6 @@ import (
 	"fmt"
 	"hash"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"net/url"
 	"os"

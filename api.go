@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"hash"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"net/url"
 	"os"
@@ -229,10 +230,10 @@ func (a *Amazing) Request(params url.Values, result interface{}) error {
 			return a.Request(params, result)
 		}
 
-		fmt.Printf("AMAZING ERROR")
+		log.Printf("AMAZING ERROR")
 		err = ioutil.WriteFile("test.xml", b, 0644)
 		if err != nil {
-			fmt.Printf("WriteFile err: %s", err)
+			log.Printf("WriteFile err: %s", err)
 		}
 		return &errorResponse
 	}
@@ -245,6 +246,10 @@ func (a *Amazing) Request(params url.Values, result interface{}) error {
 
 	err = xml.Unmarshal(b, result)
 	ioutil.WriteFile("test.xml", b, 0644)
+	err = ioutil.WriteFile("test.xml", b, 0644)
+	if err != nil {
+		log.Printf("WriteFile err after success: %s", err)
+	}
 
 	return err
 }

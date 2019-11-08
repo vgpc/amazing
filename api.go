@@ -25,7 +25,7 @@ var serviceDomains = map[string][]string{
 	"FR": []string{"ecs.amazonaws.fr", "xml-fr.amznxslt.com"},
 	"IT": []string{"webservices.amazon.it", "xml-it.amznxslt.com"},
 	"JP": []string{"ecs.amazonaws.jp", "xml-jp.amznxslt.com"},
-	"UK": []string{"ecs.amazonaws.co.uk", "xml-uk.amznxslt.com"},
+	"UK": []string{"webservices.amazon.co.uk", "xml-uk.amznxslt.com"},
 	"US": []string{"ecs.amazonaws.com", "xml-us.amznxslt.com"},
 }
 

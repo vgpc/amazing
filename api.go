@@ -226,6 +226,12 @@ func (a *Amazing) Request(params url.Values, result interface{}) error {
 			time.Sleep(time.Second)
 			return a.Request(params, result)
 		}
+
+		fmt.Printf("AMAZING ERROR")
+		err = ioutil.WriteFile("test.xml", b, 0644)
+		if err != nil {
+			fmt.Printf("WriteFile err: %s", err)
+		}
 		return &errorResponse
 	}
 

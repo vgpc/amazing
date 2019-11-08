@@ -236,7 +236,10 @@ func (a *Amazing) Request(params url.Values, result interface{}) error {
 	}
 
 	err = xml.Unmarshal(b, result)
-	ioutil.WriteFile("test.xml", b, 0777)
+	err = ioutil.WriteFile("test.xml", b, 0644)
+	if err != nil {
+		fmt.Printf("WriteFile err: %s", err)
+	}
 
 	return err
 }

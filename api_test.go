@@ -59,7 +59,7 @@ func TestItemLookup(t *testing.T) {
 	result, err := client.ItemLookup(params)
 
 	if result == nil || err != nil {
-		t.Errorf("Result is nil or error", err)
+		t.Errorf("Result is nil or error: %s", err)
 		t.Skip()
 	}
 
@@ -73,7 +73,7 @@ func TestItemLookup(t *testing.T) {
 	result, err = client.ItemLookup(params)
 
 	if result == nil || err != nil || len(result.AmazonItems.Items) == 0 {
-		t.Errorf("Result is nil, result.AmazonItems.Items 0 or error", err)
+		t.Errorf("Result is nil, result.AmazonItems.Items 0 or error: %s", err)
 		t.Errorf(fmt.Sprintf("%v", result.AmazonItems.Request.Errors))
 		t.Skip()
 	}
@@ -94,7 +94,7 @@ func TestItemSearch(t *testing.T) {
 	result, err := client.ItemSearch(params)
 
 	if result == nil || err != nil {
-		t.Errorf("Result is nil or error", err)
+		t.Errorf("Result is nil or error: %s", err)
 		t.Skip()
 	}
 
@@ -108,7 +108,7 @@ func TestItemSearch(t *testing.T) {
 	result, err = client.ItemSearch(params)
 
 	if result == nil || err != nil || len(result.AmazonItems.Items) == 0 {
-		t.Errorf("Result is nil, result.AmazonItems.Items 0 or error", err)
+		t.Errorf("Result is nil, result.AmazonItems.Items 0 or error: %s", err)
 		t.Errorf(fmt.Sprintf("%v", result.AmazonItems.Request.Errors))
 		t.Skip()
 	}
@@ -131,7 +131,7 @@ func TestItemSimilarityLookup(t *testing.T) {
 	result, err := client.SimilarityLookup(params)
 
 	if result == nil || err != nil {
-		t.Errorf("Result is nil or error", err)
+		t.Errorf("Result is nil or error: %s", err)
 		t.Skip()
 	}
 
@@ -145,7 +145,7 @@ func TestItemSimilarityLookup(t *testing.T) {
 	result, err = client.SimilarityLookup(params)
 
 	if result == nil || err != nil || len(result.AmazonItems.Items) == 0 {
-		t.Errorf("Result is nil, result.AmazonItems.Items 0 or error", err)
+		t.Errorf("Result is nil, result.AmazonItems.Items 0 or error: %s", err)
 		t.Errorf(fmt.Sprintf("%v", result.AmazonItems.Request.Errors))
 		t.Skip()
 	}
@@ -169,7 +169,7 @@ func TestCustomResultStruct(t *testing.T) {
 	err := client.Request(params, &result)
 
 	if err != nil || len(result.AmazonItems.Items) == 0 {
-		t.Errorf("Result.AmazonItems.Items 0 or error", err)
+		t.Errorf("Result.AmazonItems.Items 0 or error: %s", err)
 		t.Errorf(fmt.Sprintf("%v", result.AmazonItems.Request.Errors))
 		t.Skip()
 	}
